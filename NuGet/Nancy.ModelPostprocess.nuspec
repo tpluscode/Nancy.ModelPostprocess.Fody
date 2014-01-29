@@ -12,7 +12,7 @@
     <description>A Fody add-in, which extends Nancy with an after request model postprocessing.</description>
     <summary />
     <language>en-US</language>
-    <tags>ILWeaving, Fody, Cecil</tags>
+    <tags>ILWeaving, Fody, Cecil, Nancy</tags>
     <dependencies>
       <dependency id="Fody"/>
     </dependencies>
