@@ -3,3 +3,5 @@ syntax: regexp
 [Oo]bj
 syntax: glob
 Packages/
+*.suo
+.localhistory/
