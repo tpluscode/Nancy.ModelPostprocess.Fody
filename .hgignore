@@ -6,3 +6,4 @@ Packages/
 *.suo
 .localhistory/
 *.user
+NuGetBuild/
