@@ -1,0 +1,5 @@
+syntax: regexp
+[Bb]in
+[Oo]bj
+syntax: glob
+Packages/
