@@ -34,10 +34,10 @@
     <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\SimpleAOP.Fody.dll" />
   </Target>
   <ItemGroup>
-    <ProjectReference Include="..\BasicFodyAddin\BasicFodyAddin.csproj">
+    <ProjectReference Include="..\Nancy.ModelPostprocess.Fody\Nancy.ModelPostprocess.Fody.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
-      <Name>BasicFodyAddin</Name>
+      <Name>Nancy.ModelPostprocess.Fody</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
