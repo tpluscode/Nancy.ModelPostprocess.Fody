@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SampleBootstrapper.cs" />
     <Compile Include="SampleModule.cs" />
     <Compile Include="SampleModel.cs" />
   </ItemGroup>
