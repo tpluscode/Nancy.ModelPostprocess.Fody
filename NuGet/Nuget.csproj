@@ -12,7 +12,7 @@
     <ConfigurationName>Release</ConfigurationName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="SimpleAOP.nuspec" />
+    <None Include="Nancy.ModelPostprocess.nuspec" />
     <None Include="install.ps1" />
     <None Include="uninstall.ps1" />
     <Content Include="Fody_ToBeDeleted.txt" />
@@ -25,13 +25,13 @@
   <UsingTask TaskName="PepitaPackage.WeavingTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
   <Target Name="NuGetBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)NuGet\SimpleAOP.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\SimpleAOP.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)AssemblyToReference\bin\$(ConfigurationName)\SimpleAOP.dll" DestinationFolder="$(SolutionDir)NuGetBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)NuGet\Nancy.ModelPostprocess.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Nancy.ModelPostprocess.Fody\bin\$(ConfigurationName)\Nancy.ModelPostprocess.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)AssemblyToReference\bin\$(ConfigurationName)\Nancy.ModelPostprocess.dll" DestinationFolder="$(SolutionDir)NuGetBuild\lib\net40" />
     <Copy SourceFiles="$(SolutionDir)NuGet\Fody_ToBeDeleted.txt" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
     <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(ProjectDir)uninstall.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
-    <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)BasicFodyAddin\bin\$(ConfigurationName)\SimpleAOP.Fody.dll" />
+    <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Nancy.ModelPostprocess.Fody\bin\$(ConfigurationName)\Nancy.ModelPostprocess.Fody.dll" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\Nancy.ModelPostprocess.Fody\Nancy.ModelPostprocess.Fody.csproj">
