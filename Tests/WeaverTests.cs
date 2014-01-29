@@ -1,5 +1,13 @@
-﻿using System.Reflection;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using NUnit.Framework;
+
+using Nancy.Bootstrapper;
+using Nancy.Responses.Negotiation;
+using Nancy.Testing;
+
+using Newtonsoft.Json;
 
 [TestFixture]
 public class WeaverTests
@@ -13,14 +21,18 @@ public class WeaverTests
     }
 
     [Test]
-    public void Should_remove_attribute()
+    public void Modified_module_should_execute_postprocessor()
     {
-        var type = assembly.GetType("AssemblyToProcess.Program", true);
+        // given
+        var bootstrapper = (INancyBootstrapper)Activator.CreateInstance(this.assembly.GetType("AssemblyToProcess.SampleBootstrapper"));
+        var browser = new Browser(bootstrapper);
 
-        foreach (var method in type.GetMethods(BindingFlags.NonPublic|BindingFlags.Static))
-        {
-            Assert.That(method.GetCustomAttributes(true), Is.Empty);
-        }
+        // when
+        var response = browser.Get("Model", bc=>bc.Accept(MediaRange.FromString("application/json")));
+
+        // then
+        dynamic model = JsonConvert.DeserializeObject(response.Body.AsString());
+        Assert.That((string)model.someValue, Is.EqualTo("Set in postprocessing"));
     }
 
 #if(DEBUG)
