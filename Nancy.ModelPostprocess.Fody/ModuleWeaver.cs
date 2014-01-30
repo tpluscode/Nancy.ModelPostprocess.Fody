@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Mono.Cecil;
 
@@ -10,12 +9,6 @@ namespace Nancy.ModelPostprocess.Fody
         public IAssemblyResolver AssemblyResolver { get; set; }
 
         public ModuleDefinition ModuleDefinition { get; set; }
-
-        public Action<string> LogInfo { get; set; }
-
-        public Action<string> LogError { get; set; }
-
-        public Action<string> LogWarning { get; set; }
 
         public void Execute()
         {

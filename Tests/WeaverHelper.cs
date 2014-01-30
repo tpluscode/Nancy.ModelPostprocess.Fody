@@ -23,9 +23,6 @@ public class WeaverHelper
                               {
                                   ModuleDefinition = moduleDefinition,
                                   AssemblyResolver = new DefaultAssemblyResolver(),
-                                  LogError = Console.Error.Write,
-                                  LogInfo = Console.Out.Write,
-                                  LogWarning = Console.Out.Write
                               };
 
         weavingTask.Execute();
