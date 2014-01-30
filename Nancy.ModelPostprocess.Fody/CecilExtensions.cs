@@ -21,6 +21,21 @@ namespace Nancy.ModelPostprocess.Fody
             return firstOrDefault;
         }
 
+        public static TypeDefinition FindType(this ModuleDefinition module, string typeName)
+        {
+            var types = module.Types.Where(t => t.Name == typeName).ToList();
+
+            switch (types.Count)
+            {
+                case 1:
+                    return types.Single();
+                case 0:
+                    throw new WeavingException(string.Format("Expected to find '{0}' but found none.", typeName));
+            }
+
+            throw new WeavingException(string.Format("Expected to find '{0}' but found {1} matching types.", typeName, types.Count));
+        }
+
         public static bool IsMatch(this MethodReference methodReference, params string[] paramTypes)
         {
             if (methodReference.Parameters.Count != paramTypes.Length)
