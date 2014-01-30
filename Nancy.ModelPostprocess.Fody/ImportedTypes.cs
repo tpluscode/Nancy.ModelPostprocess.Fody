@@ -19,7 +19,7 @@ namespace Nancy.ModelPostprocess.Fody
             var nancyModuleType = NancyAssembly.MainModule.Types.Single(t => t.Name == "NancyModule");
             var routeBuilderTypeDefinition = nancyModuleType.NestedTypes.Single(nt => nt.Name == "RouteBuilder");
 
-            var postprocessorType = ReferencedAssembly.MainModule.Types.Single(type => type.Name == "ModelPostprocessor");
+            var postprocessorType = ReferencedAssembly.MainModule.Types.Single(type => type.Name == "IModelPostprocessor");
             PostprocessorType = ModuleDefinition.Import(postprocessorType);
             RouteBuilderType = ModuleDefinition.Import(routeBuilderTypeDefinition);
 

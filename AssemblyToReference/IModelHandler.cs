@@ -2,6 +2,6 @@
 {
     public interface IModelHandler<in T>
     {
-        void Postprocess(T model);
+        void Postprocess(T model, NancyModule module);
     }
 }
