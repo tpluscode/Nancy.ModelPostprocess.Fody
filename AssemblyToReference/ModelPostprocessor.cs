@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nancy.Responses.Negotiation;
+using NullGuard;
 
 namespace Nancy.ModelPostprocess
 {
@@ -14,7 +14,8 @@ namespace Nancy.ModelPostprocess
             RegisterModelHandler(new NegotiatorHandler(this));
         }
 
-        public object Postprocess(object model, NancyModule module)
+        [return: AllowNull]
+        public object Postprocess([AllowNull] object model, NancyModule module)
         {
             foreach (var handler in HandlersFor(model))
             {

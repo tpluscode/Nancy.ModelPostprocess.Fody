@@ -17,7 +17,7 @@ namespace Nancy.ModelPostprocess
         public void Postprocess(Negotiator model, NancyModule module)
         {
             var negotiationContext = model.NegotiationContext;
-            _postprocessor.Postprocess(negotiationContext.DefaultModel, module);
+            negotiationContext.DefaultModel = _postprocessor.Postprocess(negotiationContext.DefaultModel, module);
             ProcessMediaRangeMappings(negotiationContext, module);
         }
 
