@@ -4,4 +4,7 @@
     <StartAction>Program</StartAction>
     <StartProgram>e:\Piskorz\Projekty\Semantic web\Fody\AssemblyToProcess\bin\Debug\AssemblyToProcess2.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup>
+    <ProjectView>ProjectFiles</ProjectView>
+  </PropertyGroup>
 </Project>

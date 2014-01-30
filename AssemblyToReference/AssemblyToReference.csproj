@@ -55,6 +55,7 @@
     <Compile Include="IModelHandler.cs" />
     <Compile Include="IModelPostprocessor.cs" />
     <Compile Include="ModelPostprocessor.cs" />
+    <Compile Include="NegotiatorHandler.cs" />
     <Compile Include="RouteExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

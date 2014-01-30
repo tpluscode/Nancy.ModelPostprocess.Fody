@@ -46,11 +46,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelPostprocessors\NumericModelPostprocessor.cs" />
+    <Compile Include="ModelPostprocessors\SampleModelPostprocessor.cs" />
     <Compile Include="Modules\ModuleWithRouteRewritten.cs" />
     <Compile Include="Models\NumericModel.cs" />
-    <Compile Include="ModelPostprocessors\NumericModelPostprocessor.cs" />
     <Compile Include="SampleBootstrapper.cs" />
-    <Compile Include="ModelPostprocessors\SampleModelPostprocessor.cs" />
     <Compile Include="Modules\SampleModule.cs" />
     <Compile Include="Models\SampleModel.cs" />
   </ItemGroup>
