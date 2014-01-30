@@ -59,7 +59,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CecilExtensions.cs" />
+    <Compile Include="Dependencies.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="ImportedTypes.cs" />
     <Compile Include="ModuleWeaver.cs" />
+    <Compile Include="TypeProcessor.cs" />
+    <Compile Include="WeavingException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
