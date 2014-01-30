@@ -37,7 +37,7 @@ You implement your modules as usual
     {
         public SampleModule()
         {
-            Get["Model"] = p => new SampleModel { SomeValue = "Set in module" };
+            Get["Model"] = p => new SampleModel { SomeValue = "Original value" };
         }
     }
 
