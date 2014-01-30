@@ -1,6 +1,6 @@
 # This is an add-in for [Fody](https://github.com/Fody/Fody/) 
 
-It extends [Nancy](https://github.com/NancyFx/Nancy/) with a way to modify models after a rout has been executed, but before they are serialized
+It extends [Nancy](https://github.com/NancyFx/Nancy/) with a way to modify models after a route has been executed, but before they are serialized
 
 # Nuget
 
@@ -19,7 +19,7 @@ One such extension point is the [AfterRequest](https://github.com/NancyFx/Nancy/
 		// Modify ctx.Response
 	};
 	
-The problem is that `ctx.Response` holds serialized value (JSON. HTML, etc) of a response ready to be sent back to the client. Currently though there is no way to modify a model outside of a NancyModule. There is a question on StackOverflow about this: http://stackoverflow.com/questions/19095350/nancy-modify-model-in-afterrequest-event
+The problem is that `ctx.Response` holds serialized value (JSON. HTML, etc) of a response ready to be sent back to the client. Currently though there is no way to modify a model outside of a NancyModule. There is a question on StackOverflow about this [here](http://stackoverflow.com/questions/19095350/nancy-modify-model-in-afterrequest-event)
 
 # How this works
 
