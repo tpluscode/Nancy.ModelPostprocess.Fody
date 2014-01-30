@@ -13,7 +13,7 @@ namespace AssemblyToProcess
             var postprocessor = new ModelPostprocessor();
             postprocessor.RegisterModelHandler(new SampleModelPostprocessor());
             postprocessor.RegisterModelHandler(new NumericModelPostprocessor());
-            container.Register(postprocessor);
+            container.Register<IModelPostprocessor>(postprocessor);
         }
     }
 }
