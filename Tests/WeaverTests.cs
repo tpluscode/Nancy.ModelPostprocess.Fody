@@ -1,13 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
-using NUnit.Framework;
-
+using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Responses.Negotiation;
 using Nancy.Testing;
-
 using Newtonsoft.Json;
+using NUnit.Framework;
 
 [TestFixture]
 public class WeaverTests
@@ -28,11 +26,12 @@ public class WeaverTests
         var browser = new Browser(bootstrapper);
 
         // when
-        var response = browser.Get("Model", bc=>bc.Accept(MediaRange.FromString("application/json")));
+        var response = browser.Get("Model", bc => bc.Accept(MediaRange.FromString("application/json")));
 
         // then
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         dynamic model = JsonConvert.DeserializeObject(response.Body.AsString());
-        Assert.That((string)model.someValue, Is.EqualTo("Set in postprocessing"));
+        Assert.That((string)model.someValue, Is.EqualTo("Set during postprocessing"));
     }
 
 #if(DEBUG)
@@ -42,5 +41,4 @@ public class WeaverTests
         Verifier.Verify(assembly.CodeBase.Remove(0, 8));
     }
 #endif
-
 }

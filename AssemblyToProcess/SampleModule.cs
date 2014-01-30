@@ -1,12 +1,13 @@
 ﻿using Nancy;
+using Nancy.ModelPostprocess;
 
 namespace AssemblyToProcess
 {
     public class SampleModule : NancyModule
     {
-        public SampleModule()
+        public SampleModule(ModelPostprocessor postprocessor)
         {
-            Get["Model"] = p => new SampleModel { SomeValue = "Set in module" };
+            Get["Model"] = ModelPostprocessor.WrapRoute(p => new SampleModel { SomeValue = "Set in module" }, postprocessor, this);
             Get["AString"] = p => "some arbitrary value";
         }
     }
