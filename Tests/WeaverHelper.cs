@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Mono.Cecil;
+using Nancy.ModelPostprocess.Fody;
 
 public class WeaverHelper
 {
@@ -18,9 +20,13 @@ public class WeaverHelper
 
         var moduleDefinition = ModuleDefinition.ReadModule(newAssembly);
         var weavingTask = new ModuleWeaver
-        {
-            ModuleDefinition = moduleDefinition
-        };
+                              {
+                                  ModuleDefinition = moduleDefinition,
+                                  AssemblyResolver = new DefaultAssemblyResolver(),
+                                  LogError = Console.Error.Write,
+                                  LogInfo = Console.Out.Write,
+                                  LogWarning = Console.Out.Write
+                              };
 
         weavingTask.Execute();
         moduleDefinition.Write(newAssembly);
