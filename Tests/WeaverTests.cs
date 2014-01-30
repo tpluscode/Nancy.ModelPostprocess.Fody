@@ -37,6 +37,37 @@ namespace Tests
         }
 
         [Test]
+        public void Modified_negotiated_route_should_execute_postprocessor_when_returning_model_for_selected_media_range()
+        {
+            // given
+            var bootstrapper = (INancyBootstrapper)Activator.CreateInstance(_assembly.GetType("AssemblyToProcess.SampleBootstrapper"));
+            var browser = new Browser(bootstrapper);
+
+            // when
+            var response = browser.Get("Negotiated", bc => bc.Accept(MediaRange.FromString("application/json")));
+
+            // then
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            dynamic model = JsonConvert.DeserializeObject(response.Body.AsString());
+            Assert.That((string)model.number, Is.EqualTo("11"));
+        }
+
+        [Test]
+        public void Modified_negotiated_route_should_execute_postprocessor_when_returning_default_model()
+        {
+            // given
+            var bootstrapper = (INancyBootstrapper)Activator.CreateInstance(_assembly.GetType("AssemblyToProcess.SampleBootstrapper"));
+            var browser = new Browser(bootstrapper);
+
+            // when
+            var response = browser.Get("Negotiated");
+
+            // then
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            Assert.That(response.Body.AsString(), Is.EqualTo("21"));
+        }
+
+        [Test]
         public void Route_modified_manually_should_not_be_rewritten_by_weaver()
         {
             // given

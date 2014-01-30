@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nancy.Responses.Negotiation;
 
 namespace Nancy.ModelPostprocess
 {
@@ -8,11 +9,24 @@ namespace Nancy.ModelPostprocess
     {
         private readonly IList<RegisteredInjector> _handlers = new List<RegisteredInjector>();
 
+        public ModelPostprocessor()
+        {
+            RegisterModelHandler(new NegotiatorHandler(this));
+        }
+
         public object Postprocess(object model, NancyModule module)
         {
-            foreach (var handler in HandlersFor(model))
+            dynamic actualModel = model;
+
+            var negotiator = model as Negotiator;
+            if (negotiator != null)
             {
-                handler.Postprocess((dynamic)model, module);
+                actualModel = negotiator.NegotiationContext.DefaultModel;
+            }
+
+            foreach (var handler in HandlersFor(actualModel))
+            {
+                handler.Postprocess(actualModel, module);
             }
 
             return model;
