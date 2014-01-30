@@ -1,6 +1,7 @@
-﻿using Nancy;
+﻿using AssemblyToProcess.Models;
+using Nancy;
 
-namespace AssemblyToProcess
+namespace AssemblyToProcess.Modules
 {
     public class SampleModule : NancyModule
     {

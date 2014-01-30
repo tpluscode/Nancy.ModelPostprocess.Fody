@@ -36,6 +36,22 @@ namespace Tests
             Assert.That((string)model.someValue, Is.EqualTo("Set during postprocessing"));
         }
 
+        [Test]
+        public void Route_modified_manually_should_not_be_rewritten_by_weaver()
+        {
+            // given
+            var bootstrapper = (INancyBootstrapper)Activator.CreateInstance(_assembly.GetType("AssemblyToProcess.SampleBootstrapper"));
+            var browser = new Browser(bootstrapper);
+
+            // when
+            var response = browser.Get("aNumber", bc => bc.Accept(MediaRange.FromString("application/json")));
+
+            // then
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            dynamic model = JsonConvert.DeserializeObject(response.Body.AsString());
+            Assert.That((string)model.number, Is.EqualTo("2"));
+        }
+
 #if(DEBUG)
         [Test]
         public void PeVerify()
