@@ -47,7 +47,9 @@ You implement your modules as usual
     {
         public SampleModule(IModelPostprocessor processor)
         {
-			var route = new Func<dynamic, dynamic>(p => new SampleModel { SomeValue = "Original value" });
+			var route = new Func<dynamic, dynamic>(
+				p => new SampleModel { SomeValue = "Original value" }
+			);
             Get["Model"] = route.WrapRoute(processor, this);
         }
     }
@@ -58,7 +60,9 @@ In `Bootstrapper` you register the IModelPostprocessor and handlers for specific
 
 	public class SampleBootstrapper : DefaultNancyBootstrapper
     {
-        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        protected override void ApplicationStartup(
+        	TinyIoCContainer container, 
+			IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
 
