@@ -1,33 +1,35 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Mono.Cecil;
 using Nancy.ModelPostprocess.Fody;
 
-public class WeaverHelper
+namespace Tests
 {
-    public static Assembly WeaveAssembly()
+    public class WeaverHelper
     {
-        var projectPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\AssemblyToProcess\AssemblyToProcess.csproj"));
-        var assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), @"bin\Debug\AssemblyToProcess.dll");
+        public static Assembly WeaveAssembly()
+        {
+            var projectPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\AssemblyToProcess\AssemblyToProcess.csproj"));
+            var assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), @"bin\Debug\AssemblyToProcess.dll");
 #if (!DEBUG)
         assemblyPath = assemblyPath.Replace("Debug", "Release");
 #endif
 
-        var newAssembly = assemblyPath.Replace(".dll", "2.dll");
-        File.Copy(assemblyPath, newAssembly, true);
+            var newAssembly = assemblyPath.Replace(".dll", "2.dll");
+            File.Copy(assemblyPath, newAssembly, true);
 
-        var moduleDefinition = ModuleDefinition.ReadModule(newAssembly);
-        var weavingTask = new ModuleWeaver
-                              {
-                                  ModuleDefinition = moduleDefinition,
-                                  AssemblyResolver = new DefaultAssemblyResolver(),
-                              };
+            var moduleDefinition = ModuleDefinition.ReadModule(newAssembly);
+            var weavingTask = new ModuleWeaver
+                                  {
+                                      ModuleDefinition = moduleDefinition,
+                                      AssemblyResolver = new DefaultAssemblyResolver(),
+                                  };
 
-        weavingTask.Execute();
-        moduleDefinition.Write(newAssembly);
+            weavingTask.Execute();
+            moduleDefinition.Write(newAssembly);
 
-        return Assembly.LoadFile(newAssembly);
+            return Assembly.LoadFile(newAssembly);
+        }
     }
 }

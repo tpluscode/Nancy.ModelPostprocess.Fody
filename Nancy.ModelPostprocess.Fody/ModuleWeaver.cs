@@ -15,7 +15,7 @@ namespace Nancy.ModelPostprocess.Fody
             LoadDependencies();
             LoadTypes();
 
-            foreach (var typeDefinition in this.GetModuleTypes().ToList())
+            foreach (var typeDefinition in GetModuleTypes().ToList())
             {
                 ProcessType(typeDefinition);
             }
@@ -23,7 +23,7 @@ namespace Nancy.ModelPostprocess.Fody
 
         private IEnumerable<TypeDefinition> GetModuleTypes()
         {
-            return from type in this.ModuleDefinition.Types
+            return from type in ModuleDefinition.Types
                    where type.HasNancyModuleAncestor()
                    select type;
         }
