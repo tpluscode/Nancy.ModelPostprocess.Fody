@@ -27,6 +27,4 @@ public class WeaverHelper
 
         return Assembly.LoadFile(newAssembly);
     }
-
-
 }
