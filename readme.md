@@ -1,8 +1,8 @@
-## This is an add-in for [Fody](https://github.com/Fody/Fody/) 
+# This is an add-in for [Fody](https://github.com/Fody/Fody/) 
 
 It extends [Nancy](https://github.com/NancyFx/Nancy/) with a way to modify models after a rout has been executed, but before they are serialized
 
-## Nuget
+# Nuget
 
 Nuget package http://nuget.org/packages/Nancy.ModelPostprocess.Fody
 
@@ -10,7 +10,7 @@ To Install from the Nuget Package Manager Console
     
     PM> Install-Package Nancy.ModelPostprocess.Fody
 	
-## Why create this package?
+# Why create this package?
 	
 Nancy is a very flexible framework, which offers a variety of extension points. 
 One such extension point is the [AfterRequest](https://github.com/NancyFx/Nancy/wiki/The-Application-Before%2C-After-and-OnError-pipelines) pipeline
@@ -21,15 +21,15 @@ One such extension point is the [AfterRequest](https://github.com/NancyFx/Nancy/
 	
 The problem is that `ctx.Response` holds serialized value (JSON. HTML, etc) of a response ready to be sent back to the client. Currently though there is no way to modify a model outside of a NancyModule. There is a question on StackOverflow about this: http://stackoverflow.com/questions/19095350/nancy-modify-model-in-afterrequest-event
 
-## How this works
+# How this works
 
 Nancy.ModelPostprocess.Fody is a Fody add-in, which means that extra code is injected to the modules so that the models returned from routes can be modified before thay are serialized. 
 	
-## Usage
+# Usage
 
-### Module
+## Module
 
-#### Your code
+### Your code
 
 You implement your modules as usual
 
@@ -41,7 +41,7 @@ You implement your modules as usual
         }
     }
 
-#### What gets compiled
+## What gets compiled
 
 	public class SampleModule : NancyModule
     {
@@ -52,7 +52,7 @@ You implement your modules as usual
         }
     }
 
-### Bootstrapper
+## Bootstrapper
 
 In `Bootstrapper` you register the IModelPostprocessor and handlers for specific model types
 
@@ -68,7 +68,7 @@ In `Bootstrapper` you register the IModelPostprocessor and handlers for specific
         }
     }
 	
-### The model handler
+## The model handler
 
 Model handlers are classes implementing `IModelHandler<T>` interface, which has a single method
 
@@ -80,7 +80,7 @@ Model handlers are classes implementing `IModelHandler<T>` interface, which has 
         }
     }
 	
-### ModelPostprocessor class
+## ModelPostprocessor class
 
 The default implementation of `IModelPostprocessor` 
 
