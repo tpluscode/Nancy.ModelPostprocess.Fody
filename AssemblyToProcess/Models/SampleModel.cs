@@ -1,4 +1,4 @@
-﻿namespace AssemblyToProcess
+﻿namespace AssemblyToProcess.Models
 {
     public class SampleModel
     {

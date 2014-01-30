@@ -1,6 +1,7 @@
-﻿using Nancy.ModelPostprocess;
+﻿using AssemblyToProcess.Models;
+using Nancy.ModelPostprocess;
 
-namespace AssemblyToProcess
+namespace AssemblyToProcess.ModelPostprocessors
 {
     public class SampleModelPostprocessor : IModelHandler<SampleModel>
     {

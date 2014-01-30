@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using AssemblyToProcess.ModelPostprocessors;
+using Nancy;
 using Nancy.ModelPostprocess;
 
 namespace AssemblyToProcess
@@ -11,6 +12,7 @@ namespace AssemblyToProcess
 
             var postprocessor = new ModelPostprocessor();
             postprocessor.RegisterModelHandler(new SampleModelPostprocessor());
+            postprocessor.RegisterModelHandler(new NumericModelPostprocessor());
             container.Register(postprocessor);
         }
     }
