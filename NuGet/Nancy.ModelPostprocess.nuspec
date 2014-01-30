@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Nancy does not have a way to modify model after the route has been executed. The only option is to modify the serialized form. With this add-in it becomes possible to add custom processing of models once the route has been executed but before the result has been serialized.</description>
     <summary>A Fody add-in, which extends Nancy with an after request model postprocessing.</summary>
-    <releaseNotes>Introduced IModelPostprocessor interface</releaseNotes>
+    <releaseNotes />
     <language>en-US</language>
     <tags>ILWeaving, Fody, Cecil, Nancy</tags>
     <dependencies>
