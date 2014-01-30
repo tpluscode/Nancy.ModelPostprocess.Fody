@@ -16,17 +16,9 @@ namespace Nancy.ModelPostprocess
 
         public object Postprocess(object model, NancyModule module)
         {
-            dynamic actualModel = model;
-
-            var negotiator = model as Negotiator;
-            if (negotiator != null)
+            foreach (var handler in HandlersFor(model))
             {
-                actualModel = negotiator.NegotiationContext.DefaultModel;
-            }
-
-            foreach (var handler in HandlersFor(actualModel))
-            {
-                handler.Postprocess(actualModel, module);
+                handler.Postprocess((dynamic)model, module);
             }
 
             return model;

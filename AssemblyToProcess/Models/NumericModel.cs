@@ -7,6 +7,10 @@
             Number = number;
         }
 
+        public NumericModel()
+        {
+        }
+
         public int Number { get; set; }
     }
 }

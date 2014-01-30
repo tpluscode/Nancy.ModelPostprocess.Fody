@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nancy.Responses.Negotiation;
 
@@ -22,14 +23,28 @@ namespace Nancy.ModelPostprocess
 
         private void ProcessMediaRangeMappings(NegotiationContext negotiationContext, NancyModule module)
         {
-            var mappingProcessed = from mapping in negotiationContext.MediaRangeModelMappings
-                                   select new
-                                           {
-                                               mapping.Key,
-                                               Value = new Func<dynamic>(() => _postprocessor.Postprocess(mapping.Value(), module))
-                                           };
+            var modelsProcessed = new List<object>(negotiationContext.MediaRangeModelMappings.Count + 1)
+                                      {
+                                          negotiationContext.DefaultModel
+                                      };
 
-            negotiationContext.MediaRangeModelMappings = mappingProcessed.ToDictionary(p => p.Key, p => p.Value);
+            var mappingProcessed =
+                negotiationContext.MediaRangeModelMappings.Select(
+                    mapping =>
+                        {
+                            var origModel = mapping.Value();
+
+                            // ensure that same object is not processed multiple times
+                            if (modelsProcessed.Any(model => object.ReferenceEquals(model, origModel)))
+                            {
+                                return new { mapping.Key, Value = origModel };
+                            }
+
+                            modelsProcessed.Add(origModel);
+                            return new { mapping.Key, Value = _postprocessor.Postprocess(origModel, module) };
+                        });
+
+            negotiationContext.MediaRangeModelMappings = mappingProcessed.ToDictionary(p => p.Key, p => new Func<dynamic>(() => p.Value));
         }
     }
 }
