@@ -1,24 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Nancy.ModelPostprocess
 {
     public class ModelPostprocessor
     {
         private readonly IList<RegisteredInjector> _injectors = new List<RegisteredInjector>();
-
-        public static Func<object, object> WrapRoute(Func<object, object> route, ModelPostprocessor model, NancyModule module)
-        {
-            return p => model.Postprocess(route(p), module);
-        }
-
-        public static Func<object, CancellationToken, Task<object>> WrapAsyncRoute(Func<object, CancellationToken, Task<object>> route, ModelPostprocessor model, NancyModule module)
-        {
-            return async (p, token) => model.Postprocess(await route(p, token), module);
-        }
 
         public object Postprocess(object model, NancyModule context)
         {

@@ -24,19 +24,21 @@ namespace Nancy.ModelPostprocess.Fody
         /// Replaces
         /// 
         /// Get["aRoute"] = p => DoSomething(p);
+        /// Get["asyncRoute", runAsync: true] = (p,t) => DoSomething(p);
         /// 
         /// with
         /// 
-        /// Get["aRoute"] = HydraInjectionHelper.Inject(p => DoSomething(p), hydraInjector, this);
+        /// Get["aRoute"] = RouteExtensions.WrapRoute(p => DoSomething(p), processor, this);
+        /// Get["asyncRoute", runAsync: true] = RouteExtensions.WrapAsyncRoute((p,t) => DoSomething(p), processor, this);
         /// </example>
         private void ProcessConstructor(MethodDefinition constructor)
         {
             bool hydraInjected = false;
-            var hydraParam = constructor.Parameters.FirstOrDefault(x => x.ParameterType.FullName == InjectorType.FullName);
+            var hydraParam = constructor.Parameters.FirstOrDefault(x => x.ParameterType.FullName == PostprocessorType.FullName);
             Action foundAction;
             if (hydraParam == null)
             {
-                hydraParam = new ParameterDefinition("hydraInjector", ParameterAttributes.None, InjectorType);
+                hydraParam = new ParameterDefinition("hydraInjector", ParameterAttributes.None, PostprocessorType);
                 foundAction = () => constructor.Parameters.Add(hydraParam);
             }
             else
@@ -46,7 +48,7 @@ namespace Nancy.ModelPostprocess.Fody
 
             foreach (var instruction in GetRouteSetters(constructor.Body).ToList())
             {
-                var injectMethod = instruction.Item2 ? AsyncInjectMethod : InjectMethod;
+                var injectMethod = instruction.Item2 ? AsyncWrapMethod : WrapMethod;
                 var ilProcessor = constructor.Body.GetILProcessor();
                 ilProcessor.InsertBefore(instruction.Item1, Instruction.Create(OpCodes.Ldarg, hydraParam));
                 ilProcessor.InsertBefore(instruction.Item1, Instruction.Create(OpCodes.Ldarg_0));
