@@ -1,3 +1,4 @@
+![matryoshka](https://raw.githubusercontent.com/tpluscode/Nancy.ModelPostprocess.Fody/master/icon.png)
 # This is an add-in for [Fody](https://github.com/Fody/Fody/) 
 
 It extends [Nancy](https://github.com/NancyFx/Nancy/) with a way to modify models after a route has been executed, but before they are serialized
@@ -91,3 +92,5 @@ The default implementation of `IModelPostprocessor`
 1. holds instances of model handlers and passes matching models for processing,
 2. has a built-in handler for the `Negotiator` class, which handles model(s) returned for Content Negotiation,
 3. currently requires that handlers are registered manually and as concrete instances
+
+Russian Doll designed by [Simon Child](http://www.thenounproject.com/Simon Child) from the [Noun Project](http://www.thenounproject.com)
