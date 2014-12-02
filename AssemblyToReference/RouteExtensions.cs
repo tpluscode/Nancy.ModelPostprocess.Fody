@@ -13,7 +13,12 @@ namespace Nancy.ModelPostprocess
 
         public static Func<object, CancellationToken, Task<object>> WrapAsyncRoute(this Func<object, CancellationToken, Task<object>> route, IModelPostprocessor processor, NancyModule module)
         {
-            return async (p, token) => processor.Postprocess(await route(p, token), module);
+            return (p, token) => new Task<object>(obj =>
+            {
+                var task = route(p, token);
+                task.Wait();
+                return task.Result;
+            }, token);
         }
     }
 }
