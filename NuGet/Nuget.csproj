@@ -27,7 +27,6 @@
     <Copy SourceFiles="$(SolutionDir)NuGet\Nancy.ModelPostprocess.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Nancy.ModelPostprocess.Fody\bin\$(ConfigurationName)\Nancy.ModelPostprocess.Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)AssemblyToReference\bin\$(ConfigurationName)\Nancy.ModelPostprocess.dll" DestinationFolder="$(SolutionDir)NuGetBuild\lib\net40" />
-    <Copy SourceFiles="$(SolutionDir)NuGet\Fody_ToBeDeleted.txt" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
     <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(ProjectDir)uninstall.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Nancy.ModelPostprocess.Fody\bin\$(ConfigurationName)\Nancy.ModelPostprocess.Fody.dll" />
