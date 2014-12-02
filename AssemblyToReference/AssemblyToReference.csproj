@@ -36,6 +36,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Fody.targets">
+      <Paket>True</Paket>
+    </Content>
+    <Content Include="FodyWeavers.xml">
+      <Paket>True</Paket>
+    </Content>
     <Compile Include="..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
@@ -48,14 +54,6 @@
   <ItemGroup>
     <None Include="Fody.targets" />
     <None Include="paket.references" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fody.targets">
-      <Paket>True</Paket>
-    </Content>
-    <Content Include="FodyWeavers.xml">
-      <Paket>True</Paket>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="Fody.targets" />
