@@ -15,7 +15,6 @@
     <None Include="Nancy.ModelPostprocess.nuspec" />
     <None Include="install.ps1" />
     <None Include="uninstall.ps1" />
-    <Content Include="Fody_ToBeDeleted.txt" />
   </ItemGroup>
   <Target Name="Clean">
     <RemoveDir Directories="$(SolutionDir)NuGetBuild" />

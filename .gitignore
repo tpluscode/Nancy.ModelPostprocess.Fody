@@ -1,0 +1,9 @@
+syntax: regexp
+[Bb]in
+[Oo]bj
+syntax: glob
+Packages/
+*.suo
+.localhistory/
+*.user
+NuGetBuild/
